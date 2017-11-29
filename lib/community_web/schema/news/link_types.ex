@@ -1,7 +1,7 @@
-defmodule CommunityWeb.Schema.NewsTypes do
+defmodule CommunityWeb.Schema.News.LinkTypes do
   use Absinthe.Schema.Notation
 
-  alias CommunityWeb.NewsResolver
+  alias CommunityWeb.Resolvers
 
   object :link do
     field :id, non_null(:id)
@@ -11,7 +11,7 @@ defmodule CommunityWeb.Schema.NewsTypes do
 
   object :link_queries do
     field :all_links, non_null(list_of(non_null(:link))) do
-      resolve &NewsResolver.all_links/3
+      resolve &Resolvers.News.all_links/3
     end
   end
 
@@ -20,7 +20,7 @@ defmodule CommunityWeb.Schema.NewsTypes do
       arg :url, non_null(:string)
       arg :description, non_null(:string)
 
-      resolve &NewsResolver.create_link/3
+      resolve &Resolvers.News.create_link/3
     end
   end
 
