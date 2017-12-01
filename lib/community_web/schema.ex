@@ -1,8 +1,7 @@
 defmodule CommunityWeb.Schema do
   use Absinthe.Schema
 
-  import_types CommunityWeb.Schema.News.LinkTypes
-  import_types CommunityWeb.Schema.News.PostTypes
+  import_types CommunityWeb.Schema.News.{LinkTypes, PostTypes}
 
   query do
     import_fields :link_queries
