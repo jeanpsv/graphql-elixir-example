@@ -6,6 +6,11 @@ defmodule CommunityWeb.Resolvers.News do
     {:ok, links}
   end
 
+  def all_posts(_root, _args, _info) do
+    posts = News.list_posts()
+    {:ok, posts}
+  end
+
   def create_link(_root, args, _info) do
     # TODO: add detailed error message handling later
     case News.create_link(args) do
