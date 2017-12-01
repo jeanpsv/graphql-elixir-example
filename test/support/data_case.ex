@@ -22,6 +22,7 @@ defmodule Community.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Community.DataCase
+      import Community.Factory
     end
   end
 

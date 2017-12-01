@@ -1,5 +1,6 @@
 defmodule CommunityWeb.Schema.News.LinkTypes do
   use Absinthe.Schema.Notation
+  use Absinthe.Ecto, repo: Community.Repo
 
   alias CommunityWeb.Resolvers
 
@@ -7,6 +8,7 @@ defmodule CommunityWeb.Schema.News.LinkTypes do
     field :id, non_null(:id)
     field :url, non_null(:string)
     field :description, non_null(:string)
+    field :post, :post, resolve: assoc(:post)
   end
 
   object :link_queries do
