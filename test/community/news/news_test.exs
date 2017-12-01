@@ -11,9 +11,12 @@ defmodule Community.NewsTest do
     @invalid_attrs %{description: nil, url: nil}
 
     def link_fixture(attrs \\ %{}) do
+      post = insert(:post)
+      link_attrs = params_for(:link, post: post)
+      
       {:ok, link} =
         attrs
-        |> Enum.into(@valid_attrs)
+        |> Enum.into(link_attrs)
         |> News.create_link()
 
       link
@@ -30,9 +33,11 @@ defmodule Community.NewsTest do
     end
 
     test "create_link/1 with valid data creates a link" do
-      assert {:ok, %Link{} = link} = News.create_link(@valid_attrs)
-      assert link.description == "some description"
-      assert link.url == "some url"
+      post = insert(:post)
+      valid_attrs = params_for(:link, post: post)
+      assert {:ok, %Link{} = link} = News.create_link(valid_attrs)
+      assert link.description == valid_attrs.description
+      assert link.url == valid_attrs.url
     end
 
     test "create_link/1 with invalid data returns error changeset" do
@@ -41,10 +46,11 @@ defmodule Community.NewsTest do
 
     test "update_link/2 with valid data updates the link" do
       link = link_fixture()
-      assert {:ok, link} = News.update_link(link, @update_attrs)
+      update_attrs = params_for(:link)
+      assert {:ok, link} = News.update_link(link, update_attrs)
       assert %Link{} = link
-      assert link.description == "some updated description"
-      assert link.url == "some updated url"
+      assert link.description == update_attrs.description
+      assert link.url == update_attrs.url
     end
 
     test "update_link/2 with invalid data returns error changeset" do
